@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pinterest!{% endblock %}
+
+{% block body %}
+<h1>{{ pluralize(pins|length, 'pin', 'pins') }}</h1>
+    <article>
+        {% for pin in pins %}
+            <h1>{{ pin.title }}</h1>
+            <p>{{ pin.description }}</p>
+        {% else %}
+            <h3>Pas de Pin</h3>
+        {% endfor %}
+    </article>
+
+{% endblock %}
