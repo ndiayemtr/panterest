@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Pin;
+use App\Form\PinType;
 use App\Repository\PinRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,12 +37,7 @@ class PinsController extends AbstractController
         
         $pin = new Pin;
 
-        $form = $this->createFormBuilder($pin)
-            ->add('title', null)
-            ->add('description', null, [
-                'attr' => ['rows' => 10, 'cols' => 50]
-            ])
-            ->getForm();
+        $form = $this->createForm(PinType::class, $pin);
 
             $form->handleRequest($request);
 
@@ -57,16 +53,12 @@ class PinsController extends AbstractController
     }
 
      /**
-     * @Route("pins/{id<[0-9]+>}/edit", priority=11, name="app_pin_edit")
+     * @Route("pins/{id<[0-9]+>}/edit", priority=11, name="app_pin_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Pin $pin, EntityManagerInterface $em) : Response {
         
-        $form = $this->createFormBuilder($pin)
-            ->add('title', null)
-            ->add('description', null, [
-                'attr' => ['rows' => 10, 'cols' => 50]
-            ])
-            ->getForm();
+        $form = $this->createForm(PinType::class, $pin);
+          
 
             $form->handleRequest($request);
 
@@ -76,7 +68,7 @@ class PinsController extends AbstractController
 
                 return $this->redirectToRoute('app_pin_show', ['id' => $pin->getId()]);
             }
-            
+
             $form = $form->createView();
             return $this->render('pins/edit.html.twig', compact('form', 'pin')
         );
