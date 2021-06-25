@@ -4,6 +4,7 @@
 
 {% block body %}
 <h1>{{ pluralize(pins|length, 'pin', 'pins') }}</h1>
+    
     <article>
         {% for pin in pins %}
             <h1><a href="{{ path('app_pin_show', {'id': pin.id}) }}">{{ pin.title }}</a></h1>
