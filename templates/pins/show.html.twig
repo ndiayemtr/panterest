@@ -10,7 +10,6 @@
     </article>
 
     <a href="{{ path('app_pin_edit', {'id': pin.id}) }}">Edit</a> |
-    <a href="{{ path('app_home') }}">Go Back</a> |
     <a href="{{ path('app_pin_delete', {'id': pin.id}) }}" onclick="confirm('Voulez vous faire cette action?');" >Delete</a>
 
 {% endblock %}
