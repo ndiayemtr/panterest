@@ -19,6 +19,7 @@ class PinType extends AbstractType
                 'delete_label' => '...',
                 #'download_label' => '...',
                 'download_uri' => false,
+                'imagine_pattern' => 'squared_thumbnail_smail'
                 #'image_uri' => true,
                 #'asset_helper' => true,
             ])
