@@ -6,6 +6,17 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.vich-image .form-check {
+    @extend .mb-3;
+}
+
+.vich-image img {
+    @extend .mb-2;
+    @extend .rounded;
+    @extend .shadow;
+    @extend .img-thumbnail;
+}
+
 section {
     h1 {
         color: green;
