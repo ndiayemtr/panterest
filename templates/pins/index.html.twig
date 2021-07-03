@@ -3,16 +3,23 @@
 {% block title %}Pinterest!{% endblock %}
 
 {% block body %}
-<h1>{{ pluralize(pins|length, 'pin', 'pins') }}</h1>
-    
-    <article>
-        {% for pin in pins %}
-            <h1><a href="{{ path('app_pin_show', {'id': pin.id}) }}">{{ pin.title }}</a></h1>
-            <p>{{ pin.description | u.truncate(10, '...', false) }}</p>
-            <p> Submitted {{pin.createdAt | ago }}</p>
-        {% else %}
-            <h3>Pas de Pin</h3>
+    {% if pins|length >0 %}
+        <h1 class="text-center text-muted">{{ pluralize(pins|length, 'pin', 'pins') }}</h1>
+       
+        {% for row in pins|batch(3) %}  
+        <div class="row">
+            {% for pin in row %}
+                <article class="col-md-4">
+                    <img src="{{ pin.imageName ?  vich_uploader_asset(pin) : asset('images/defaut.jpg') | imagine_filter('squared_thumbnail_medium')}}" alt="{{ pin.title }}">
+                    <h1><a href="{{ path('app_pin_show', {'id': pin.id}) }}">{{ pin.title }}</a></h1>
+                    <p>{{ pin.description | u.truncate(10, '...', false) }}</p>
+                    <p> Submitted {{pin.createdAt | ago }}</p>
+                </article>
+            {% endfor %}
+        </div>
         {% endfor %}
-    </article>
+     {% else %}
+            <p class="h1 mt-5 text-center">Pas de pins. <a href="{{ path('app_pin_create') }}">Create Pin</a></p>
+    {% endif %}  
 
 {% endblock %}

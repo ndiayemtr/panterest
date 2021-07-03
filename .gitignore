@@ -28,6 +28,7 @@ yarn-error.log
 
 ###> telecharger img ###
 /public/uploads/
+/public/images/
 ###< telecharger img  ###
 
 ###> liip/imagine-bundle ###
