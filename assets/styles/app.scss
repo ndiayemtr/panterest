@@ -4,11 +4,20 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: green;
 }
 
 .vich-image .form-check {
     @extend .mb-3;
+}
+
+.taille-div {
+    height: 300px;
+    width: 300px;
+
+    img {
+        height: 200px;
+        width: 200px;
+    }
 }
 
 .vich-image img {
@@ -45,10 +54,6 @@ section {
     background-color: blue;
 }
 
-.img-index {
-    height: 300px;
-    width: 300px;
-}
 
 .pin {
     transition: transform 0.3s ease-out;
