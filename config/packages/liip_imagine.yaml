@@ -14,7 +14,7 @@ liip_imagine:
         squared_thumbnail_smail:
             filters:
                 thumbnail:
-                    size: [300,300]
+                    size: [200,200]
                     mode: outbound
                     allow_upscale: true
 

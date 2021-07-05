@@ -4,6 +4,7 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
+    background-color: green;
 }
 
 .vich-image .form-check {
@@ -42,4 +43,16 @@ section {
 
 .alert-info {
     background-color: blue;
+}
+
+.img-index {
+    height: 300px;
+    width: 300px;
+}
+
+.pin {
+    transition: transform 0.3s ease-out;
+    img:hover {
+        transform: scale(1.075);
+    }
 }
