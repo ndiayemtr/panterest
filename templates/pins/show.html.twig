@@ -20,11 +20,8 @@
                         {{ pin.description}} 
                     </p>
                     <a class="btn btn-light" href="{{ path('app_pin_edit', {'id': pin.id}) }}">Edit</a> |
-        <a class="btn btn-light" href="{{ path('app_pin_delete', {'id': pin.id}) }}" onclick="confirm('Voulez vous faire cette action?');" >Delete</a>
-                </article>
-   
-    
-        
+                    <a class="btn btn-light" href="{{ path('app_pin_delete', {'id': pin.id}) }}" onclick="confirm('Voulez vous faire cette action?');" >Delete</a>
+                </article>         
         </div>
     </div>
     
