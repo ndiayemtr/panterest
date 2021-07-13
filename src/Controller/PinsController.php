@@ -10,15 +10,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 class PinsController extends AbstractController
 {
     /**
      * @Route("/", name="app_home")
      */
-    public function index(PinRepository $repo): Response
+    public function index(Request $request, PinRepository $repo, PaginatorInterface $paginator): Response
     {
-        $pins = $repo->findBy([], ['createdAt' => 'DESC']);
+        $donnees = $repo->findBy([], ['createdAt' => 'DESC']);
+
+        $pins = $paginator->paginate(
+            $donnees, 
+            $request->query->getInt('page', 1), 
+            6 
+        );
+
         return $this->render('pins/index.html.twig', compact('pins'));
     }
 

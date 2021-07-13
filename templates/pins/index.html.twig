@@ -23,8 +23,14 @@
                 </div>
                 
             {% endfor %}
+             
         </div>
         {% endfor %}
+       <div class="pagination text-center">
+        {{ knp_pagination_render(pins, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
+       </div>
+   
+        
      {% else %}
             <p class="h1 mt-5 text-center">Pas de pins. <a href="{{ path('app_pin_create') }}">Create Pin</a></p>
     {% endif %}  
