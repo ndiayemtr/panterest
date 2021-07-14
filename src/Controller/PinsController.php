@@ -24,7 +24,7 @@ class PinsController extends AbstractController
         $pins = $paginator->paginate(
             $donnees, 
             $request->query->getInt('page', 1), 
-            6 
+            8
         );
 
         return $this->render('pins/index.html.twig', compact('pins'));
