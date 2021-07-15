@@ -3,10 +3,24 @@
 {% block title %}Reset your password{% endblock %}
 
 {% block body %}
-    <h1>Reset your password</h1>
+<div class="row">
+        <div class="col-md-6 mx-auto">
 
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }}
+        <h1 class="mt-5 mb-3 text-center">Reset your password</h1>
+
+    {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-error mb-3 rounded" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+            {{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword) }}
+        <br>
+            
+
+
+        <button type="submit" class="btn btn-primary col-md-12">Reset password</button>
+        {{ form_end(resetForm) }}
+    </div>
+    </div>
 {% endblock %}
+
