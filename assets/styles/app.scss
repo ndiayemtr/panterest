@@ -5,6 +5,9 @@
 body {
     font-family: 'Montserrat', sans-serif;
 }
+a {
+    text-decoration: none;
+}
 
 .vich-image .form-check {
     @extend .mb-3;
