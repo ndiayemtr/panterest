@@ -222,7 +222,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->firstName. ' '.$this->lastName;
     }
 
-    public function gravatar(?int $size = 100){
+    public function gravatarUrl(?int $size = 100){
         return 'https://www.gravatar.com/avatar/'. md5(strtolower(trim($this->getEmail()))) .'/?s='.$size;
     }
 
