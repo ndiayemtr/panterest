@@ -11,11 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class PinsController extends AbstractController
 {
     /**
      * @Route("/", name="app_home")
+     * @Security("is_granted('PIN_CREATE')")
      */
     public function index(Request $request, PinRepository $repo, PaginatorInterface $paginator): Response
     {
@@ -32,6 +34,7 @@ class PinsController extends AbstractController
 
     /**
      * @Route("pins/{id<[0-9]+>}", priority=10, name="app_pin_show")
+     * @Security("is_granted('ROLE_USER') && user.isVerified()")
      */
     public function show(Pin $pin){
         return $this->render('pins/show.html.twig', compact('pin'));
@@ -40,6 +43,7 @@ class PinsController extends AbstractController
 
     /**
      * @Route("pins/create", name="app_pin_create")
+     * @Security("is_granted('ROLE_USER') && user.isVerified()")
      */
     public function create(Request $request, EntityManagerInterface $em) : Response {
         
@@ -65,6 +69,7 @@ class PinsController extends AbstractController
 
      /**
      * @Route("pins/{id<[0-9]+>}/edit", priority=11, name="app_pin_edit", methods={"GET", "POST"})
+     * @Security("is_granted('PIN_EDIT', pin)")
      */
     public function edit(Request $request, Pin $pin, EntityManagerInterface $em) : Response {
         
@@ -89,14 +94,21 @@ class PinsController extends AbstractController
 
     /**
      * @Route("pins/{id<[0-9]+>}/delete", priority=12, name="app_pin_delete", methods={"GET"})
+     * @Security("is_granted('ROLE_USER') && user.isVerified() && pin.getUser() == user")
+     * @Security("is_granted('PIN_DELETE', pin)")
      */
     public function delete(Pin $pin, EntityManagerInterface $em) : Response {
+
+        //denyAccessUnlessGranted() Peut Remplacer @Security("is_granted('PIN_DELETE', pin)")
+        $this->denyAccessUnlessGranted('PIN_DELETE', $pin);
+
         $em->remove($pin);
         $em->flush();
 
         $this->addFlash('info', 'Pin supprimé');
 
         return $this->redirectToRoute('app_home');
+
     }
 
     

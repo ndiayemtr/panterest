@@ -16,11 +16,14 @@
                     <p class="p-2 pb-3 text-muted">
                         <small>Submitted <time datetime="{{ pin.createdAt | date('Y-m-d') }}"> {{pin.createdAt | ago }} </time>{{pin.user.getFullName}}</small> 
                     </p>
+
                     <p class="p-3 text-break">
                         {{ pin.description}} 
                     </p>
-                    <a class="btn btn-light" href="{{ path('app_pin_edit', {'id': pin.id}) }}">Edit</a> |
-                    <a class="btn btn-light" href="{{ path('app_pin_delete', {'id': pin.id}) }}" onclick="confirm('Voulez vous faire cette action?');" >Delete</a>
+                    {% if app.user == pin.user%}
+                        <a class="btn btn-light" href="{{ path('app_pin_edit', {'id': pin.id}) }}">Edit</a> |
+                        <a class="btn btn-light" href="{{ path('app_pin_delete', {'id': pin.id}) }}" onclick="confirm('Voulez vous faire cette action?');" >Delete</a>
+                    {% endif %}
                 </article>         
         </div>
     </div>
